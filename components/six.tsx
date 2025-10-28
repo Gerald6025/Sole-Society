@@ -86,7 +86,7 @@ const LogoRowAnimated: React.FC<LogoRowAnimatedProps> = ({
           duration: 3.2,
           stagger: { each: 3.5, from: "center", yoyo: true, repeat: -1 },
         },
-        "+=0"
+        "+=1"
       );
     }, wrapRef);
 
@@ -107,7 +107,7 @@ const LogoRowAnimated: React.FC<LogoRowAnimatedProps> = ({
       <ul
         style={{
           display: "flex",
-          gap: 48,
+          gap: 75,
           listStyle: "none",
           padding: 0,
           margin: 0,
