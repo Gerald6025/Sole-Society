@@ -39,6 +39,20 @@ body {
   @apply w-full;
 }
 
+
+.navy{
+@apply relative
+}
+
+.navy::after {
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300;
+  content: '';
+}
+
+.navy:hover::after {
+  @apply w-full;
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0px) rotate(-26deg);

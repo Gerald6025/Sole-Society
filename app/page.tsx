@@ -2,6 +2,7 @@ import React from 'react'
 import Hero from '@/components/hero'
 import LogoRowAnimated from '@/components/six'
 import Well from '@/components/well'
+import New from '@/components/new'
 
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
       <Hero />
       <LogoRowAnimated />
       <Well />
+      <New />
       
     </div>
   )
