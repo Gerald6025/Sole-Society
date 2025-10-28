@@ -18,8 +18,8 @@ const Hero = () => {
       image:
         "https://res.cloudinary.com/dvqhcm07a/image/upload/v1761221858/red_vans-removebg-preview_z186wm.png",
       color: "#7f1217",
-      width: 700,
-      height: 700,
+      width: 600,
+      height: 600,
       position: "bottom-50",
       alt: "vans",
     },
@@ -49,7 +49,7 @@ const Hero = () => {
       color: "#1d473e",
       width: 600,
       height: 600,
-      position: "top-10",
+      position: "top-5",
       alt: "nike",
     },
   
