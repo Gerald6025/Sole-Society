@@ -8,7 +8,7 @@ const New = () => {
   const items = [
     { label: 'New Arrivals', href: '/', image: 'https://res.cloudinary.com/dvqhcm07a/image/upload/v1761650876/NB_xezqdw.jpg' },
     { label: 'Best Sellers', href: '/', image: 'https://res.cloudinary.com/dvqhcm07a/image/upload/v1761650878/nike-basketball_csnxux.webp' },
-    { label: 'New In Premium', href: '/', image: 'https://res.cloudinary.com/dvqhcm07a/image/upload/v1761650876/1_5vQ5NwwqvQjiPmF7ZzyoOw_tjqfda.jpg' },
+    { label: 'New In Premium', href: '/', image: 'https://res.cloudinary.com/dvqhcm07a/image/upload/v1761729113/26SNEAKERS1-videoSixteenByNine3000-v3_gdpfns.jpg' },
     { label: 'Halloween Styles', href: '/', image: 'https://res.cloudinary.com/dvqhcm07a/image/upload/v1761650879/Halloween_sk8-hi-1-2_Landscape_osshtm.jpg' },
   ]
   const [active, setActive] = useState(0)
@@ -21,7 +21,7 @@ const New = () => {
             onMouseEnter={() => setActive(i)}
             className="
               font-black 
-              text-4xl 
+              text-4xl  
               text-black 
               transition-transform 
               duration-300 
@@ -36,6 +36,7 @@ const New = () => {
           </h1>
         ))}
       </div>
+
       <div>
         <Link href={items[active].href}>
           <Image

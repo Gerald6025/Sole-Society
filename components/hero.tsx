@@ -34,7 +34,7 @@ const Hero = () => {
       color: "#3574a3",
       width: 600,
       height: 600,
-      position: "top-10",
+      position: "md:top-10",
       alt: "nike",
     },
   
@@ -128,7 +128,7 @@ const Hero = () => {
             key={index}
             onClick={() => goToSlide(index)}
             className={`w-3 h-3 rounded-full ${
-              index === currentIndex ? "bg-black" : "bg-gray-400"
+              index === currentIndex ? "bg-black" : "bg-gray-400" 
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

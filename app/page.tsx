@@ -3,6 +3,7 @@ import Hero from '@/components/hero'
 import LogoRowAnimated from '@/components/six'
 import Well from '@/components/well'
 import New from '@/components/new'
+import JustDropped from '@/components/JustDropped'
 
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
       <LogoRowAnimated />
       <Well />
       <New />
+      <JustDropped />
       
     </div>
   )
