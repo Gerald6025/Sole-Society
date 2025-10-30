@@ -92,6 +92,7 @@ const JustDropped: React.FC = () => {
             <button
               onClick={() => scroll("left")}
               className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-gray-100"
+              title="Scroll left"
             >
               <ChevronLeft />
             </button>
@@ -138,6 +139,7 @@ const JustDropped: React.FC = () => {
             <button
               onClick={() => scroll("right")}
               className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10 hover:bg-gray-100"
+              title="Scroll right"
             >
               <ChevronRight />
             </button>
