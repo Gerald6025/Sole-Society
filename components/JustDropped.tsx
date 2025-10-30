@@ -63,31 +63,31 @@ const JustDropped: React.FC = () => {
   };
 
   return (
-    <section className="w-full mt-28 bg-white">
+    <section className="w-full mt-30 bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-center pr-10">
-        {/* LEFT IMAGE */}
+        
         <div className="relative w-full ml-9 h-[380px] lg:h-[650px]">
           <Image
-            src="/pal.jpg" // Replace with your image
+            src="/pal.jpg" 
             alt="Model sitting with sneakers"
             fill
             className="object-cover rounded-lg"
           />
         </div>
 
-        {/* RIGHT SECTION */}
+        
         <div className="px-6 lg:px-8">
-          <h2 className="text-4xl md:text-7xl font-bold mb-29">Just dropped kicks</h2>
-          <p className="text-black mb-6 text-base">Keep your rotation fresh.</p>
+          <h2 className="text-4xl md:text-7xl font-bold mb-10">Just dropped kicks</h2>
+          <p className="text-black mb-6 relative bottom-7 font-black text-base">Keep your rotation fresh.</p>
 
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 bg-black text-white px-5 py-3 rounded-md font-medium hover:bg-gray-900 transition"
+            className="inline-flex items-center gap-2 relative bottom-10 bg-black text-white px-5 py-3 rounded-md font-medium hover:bg-gray-900 transition"
           >
             Shop now →
           </Link>
 
-          {/* PRODUCT SCROLLER */}
+          
           <div className="relative mt-8">
             <button
               onClick={() => scroll("left")}
@@ -98,12 +98,12 @@ const JustDropped: React.FC = () => {
 
             <div
               id="just-dropped-scroll"
-              className="flex overflow-x-auto gap-6 scroll-smooth no-scrollbar px-10"
+              className="flex overflow-x-auto gap-4 scroll-smooth no-scrollbar px-0 mb-5"
             >
               {loading
                 ? Array.from({ length: 5 }).map((_, i) => (
                     <div key={i} className="w-[200px] animate-pulse flex-shrink-0">
-                      <div className="aspect-square bg-gray-200 rounded-md" />
+                      <div className="aspect-[3/4] bg-gray-200 rounded-md" />
                       <div className="h-4 bg-gray-200 rounded w-3/4 mt-3" />
                       <div className="h-4 bg-gray-200 rounded w-1/2 mt-2" />
                     </div>
@@ -114,11 +114,12 @@ const JustDropped: React.FC = () => {
                       href={`/product/${p._id}`}
                       className="min-w-[200px] max-w-[200px] flex-shrink-0 group"
                     >
-                      <div className="relative aspect-[1/1] rounded-md overflow-hidden bg-gray-200">
+                      <div className="relative aspect-[3/4] rounded-md overflow-hidden bg-gray-200">
                         <Image
                           src={p.imageurl}
                           alt={p.title}
                           fill
+                          unoptimized
                           className="object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                         <span className="absolute top-2 left-2 bg-black text-white text-xs font-semibold px-2 py-1 rounded">

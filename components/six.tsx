@@ -7,14 +7,14 @@ interface LogoItem {
   id: string;
   href: string;
   alt: string;
-  src: string; // image URL
+  src: string; 
 }
 
 interface LogoRowAnimatedProps {
   triggerOnScroll?: boolean;
 }
 
-// 🖼️ Replace these Cloudinary URLs with your own
+
 const logos: LogoItem[] = [
   {
     id: "intel",
@@ -141,9 +141,11 @@ const LogoRowAnimated: React.FC<LogoRowAnimatedProps> = ({
                   "grayscale(100%) brightness(1.4)")
               }
             >
-              <img
+              <Image
                 src={l.src}
                 alt={l.alt}
+                width={140}
+                height={56}
                 style={{
                   width: "100%",
                   maxWidth: 140,

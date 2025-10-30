@@ -1,7 +1,7 @@
 "use client"
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { FaSearch, FaShoppingBag,  } from 'react-icons/fa'
+import { FaSearch, FaShoppingBag } from 'react-icons/fa'
 import { RxAvatar, RxHamburgerMenu, RxCross2 } from "react-icons/rx";
 
 const Nav = () => {

@@ -6,9 +6,10 @@ export const GET = async () => {
   try {
     await connect();
     const posts = await Post.find();
-    return new NextResponse(JSON.stringify(posts), { status: 200 });
+    return NextResponse.json(posts, { status: 200 });
   } catch (error) {
-    return new NextResponse("Database Error" + error, { status: 500 });
+    const message = error instanceof Error ? error.message : String(error);
+    return NextResponse.json({ error: `Database Error: ${message}` }, { status: 500 });
   }     
 
 };
