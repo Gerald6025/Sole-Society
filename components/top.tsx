@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -71,6 +71,7 @@ const shoes: Post[] = [
     title: "Puma Rs",
     price: 59.99,
     imageurl: "/puma.png",
+    imageurl2: "/puma2.png",
     description: "Race day speed",
     brand: "Puma",
     createdAt: "2025-10-25T18:45:00Z",
@@ -113,7 +114,7 @@ const currency = (n: number) =>
 export default function Top() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [startIndex, setStartIndex] = useState(0);
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     // Initialize from local shoes array, sorted by createdAt desc
@@ -124,18 +125,13 @@ export default function Top() {
     setLoading(false);
   }, []);
 
-  const perPage = 3;
-  const visibleCount = Math.min(perPage, posts.length || perPage);
-  const visiblePosts = posts.length
-    ? Array.from({ length: visibleCount }, (_, i) => posts[(startIndex + i) % posts.length])
-    : [];
-
   const scroll = (dir: "left" | "right") => {
-    if (posts.length <= 1) return;
-    setStartIndex((prev) => {
-      if (dir === "left") return (prev - 1 + posts.length) % posts.length;
-      return (prev + 1) % posts.length;
-    });
+    const el = scrollerRef.current;
+    if (!el) return;
+    const firstSlide = el.querySelector<HTMLElement>("[data-slide]");
+    const gapPx = parseFloat(getComputedStyle(el).columnGap || "0");
+    const slideWidth = (firstSlide?.offsetWidth ?? el.clientWidth / 3) + (Number.isNaN(gapPx) ? 0 : gapPx);
+    el.scrollBy({ left: dir === "left" ? -slideWidth : slideWidth, behavior: "smooth" });
   };
 
   return (
@@ -164,21 +160,23 @@ export default function Top() {
 
         <div
           id="top-scroll"
-          className="flex w-full gap-4 px-0 mb-5"
+          ref={scrollerRef}
+          className="flex w-full gap-4 px-0 mb-5 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory"
         >
           {loading
-            ? Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="animate-pulse flex-shrink-0 basis-1/3">
+            ? Array.from({ length: 6 }).map((_, i) => (
+                <div data-slide key={i} className="animate-pulse flex-shrink-0 basis-1/3 min-w-[33.333%] snap-start">
                   <div className="aspect-[10/9] bg-gray-200 rounded-md" />
                   <div className="h-4 bg-gray-200 rounded w-3/4 mt-3" />
                   <div className="h-4 bg-gray-200 rounded w-1/2 mt-2" />
                 </div>
               ))
-            : visiblePosts.map((p) => (
+            : posts.map((p) => (
                 <Link
                   key={p._id}
                   href={`/product/${p._id}`}
-                  className="basis-1/3 flex-shrink-0"
+                  data-slide
+                  className="basis-1/3 flex-shrink-0 min-w-[33.333%] snap-start"
                 >
                   <div className="group/image relative aspect-[10/9] rounded-md overflow-hidden bg-gray-200 ">
                     <Image
@@ -207,6 +205,10 @@ export default function Top() {
         </div>
 
       </div>
+      <style jsx>{`
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </section>
   );
 }
