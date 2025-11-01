@@ -63,7 +63,7 @@ const JustDropped: React.FC = () => {
   };
 
   return (
-    <section className="w-full mt-30 bg-white">
+    <section className="w-full mt-40 bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-center pr-10">
         
         <div className="relative w-full ml-9 h-[380px] lg:h-[650px]">
@@ -75,7 +75,6 @@ const JustDropped: React.FC = () => {
           />
         </div>
 
-        
         <div className="px-6 lg:px-8">
           <h2 className="text-4xl md:text-7xl font-bold mb-10">Just dropped kicks</h2>
           <p className="text-black mb-6 relative bottom-7 font-black text-base">Keep your rotation fresh.</p>
@@ -87,7 +86,6 @@ const JustDropped: React.FC = () => {
             Shop now →
           </Link>
 
-          
           <div className="relative mt-8">
             <button
               onClick={() => scroll("left")}

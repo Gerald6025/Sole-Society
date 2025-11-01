@@ -5,6 +5,7 @@ import Well from '@/components/well'
 import New from '@/components/new'
 import JustDropped from '@/components/JustDropped'
 import Yeezy from '@/components/yeezy'
+import Top from '@/components/top'
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
       <New />
       <JustDropped />
       <Yeezy />
+      <Top />
     </div>
   )
 }
