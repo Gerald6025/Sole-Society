@@ -74,7 +74,7 @@ const LogoRowAnimated: React.FC<LogoRowAnimatedProps> = ({
         defaults: { ease: "power1.inOut" },
       });
 
-      // Smooth fade-in/out with overlap so screen is never empty
+      
       tl.to(nodes, {
         opacity: 1,
         duration: 1.2,
