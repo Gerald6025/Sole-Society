@@ -66,7 +66,7 @@ const JustDropped: React.FC = () => {
     <section className="w-full mt-40 bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-center pr-10">
         
-        <div className="relative w-full ml-9 h-[380px] lg:h-[650px]">
+        <div className="relative w-full md:ml-9 ml-5 h-[380px] lg:h-[650px]">
           <Image
             src="/pal.jpg" 
             alt="Model sitting with sneakers"

@@ -78,22 +78,15 @@ const shoes: Post[] = [
   },
   {
     _id: "s7",
-    title: "Skate Vulc",
-    price: 89.99,
-    imageurl: "https://res.cloudinary.com/demo/image/upload/w_600,h_800,c_fill/motorbike.jpg",
+    title: "Reebok Club C 42",
+    price: 93.99,
+    imageurl: "/ree.png",
+    imageurl2: "/ree2.png",
     description: "Durable suede board feel",
-    brand: "DeckFit",
+    brand: "Reebok",
     createdAt: "2025-10-24T16:20:00Z",
   },
-  {
-    _id: "s8",
-    title: "Hike GTX",
-    price: 175.0,
-    imageurl: "https://res.cloudinary.com/demo/image/upload/w_600,h_800,c_fill/mountain.jpg",
-    description: "Waterproof mountain boot",
-    brand: "Alpine",
-    createdAt: "2025-10-23T11:05:00Z",
-  },
+ 
 ];
 
 const ChevronLeft = () => (
@@ -117,7 +110,7 @@ export default function Top() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Initialize from local shoes array, sorted by createdAt desc
+    
     const sorted = shoes.slice().sort(
       (a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
     );

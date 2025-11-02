@@ -10,7 +10,7 @@ import Top from '@/components/top'
 
 const Home = () => {
   return (
-    <div className='bg-[#ffffff] w-full h-[700vh] absolute  top-0 left-0 overflow-hidden'>
+    <div className='bg-[#ffffff] w-full md:h-[700vh] h-[1100vh] absolute  top-0 left-0 overflow-hidden'>
       <Hero />
       <LogoRowAnimated />
       <Well />
