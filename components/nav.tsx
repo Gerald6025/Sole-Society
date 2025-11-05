@@ -3,9 +3,12 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { FaSearch, FaShoppingBag } from 'react-icons/fa'
 import { RxAvatar, RxHamburgerMenu, RxCross2 } from "react-icons/rx";
+import { useCart } from '@/components/cartContext'
 
 const Nav = () => {
   const [open, setOpen] = useState(false)
+  const { items } = useCart()
+  const count = items.reduce((sum, i) => sum + i.qty, 0)
   return (
     <div className='relative z-50 top-4 flex items-center justify-between px-4 py-2 sm:px-6 md:px-10'>
       <div>
@@ -27,7 +30,14 @@ const Nav = () => {
       </div>
       <div className='flex gap-4 sm:gap-5 md:gap-6 text-xl'>
         <Link href='/search'><FaSearch className='text-black' /></Link>
-        <Link href='/cart'><FaShoppingBag className='text-black' /></Link>
+        <Link href='/cart' className='relative'>
+          <FaShoppingBag className='text-black' />
+          {count > 0 && (
+            <span className='absolute -top-2 -right-3 bg-red-600 text-white text-[10px] leading-none font-bold px-1.5 py-1 rounded-full min-w-[18px] text-center'>
+              {count > 99 ? '99+' : count}
+            </span>
+          )}
+        </Link>
         <Link href='/account'><RxAvatar className='text-black text-2xl' /></Link>
       </div>
       {open && (

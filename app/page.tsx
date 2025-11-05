@@ -1,3 +1,4 @@
+
 import React from "react";
 import Hero from "@/components/hero";
 import LogoRowAnimated from "@/components/six";
@@ -10,6 +11,7 @@ import Trending from "@/components/trending";
 import By from "@/components/by";
 import Footer from "@/components/footer";
 import Who from "@/components/who";
+import SneakerProduct from "@/components/sneakerProduct"
 
 const Home = () => {
   return (
@@ -25,6 +27,7 @@ const Home = () => {
       <Trending />
       <By />
       <Footer />
+      
     </div>
   );
 };
