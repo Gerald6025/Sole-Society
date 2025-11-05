@@ -11,7 +11,7 @@ import Trending from "@/components/trending";
 import By from "@/components/by";
 import Footer from "@/components/footer";
 import Who from "@/components/who";
-import SneakerProduct from "@/components/sneakerProduct"
+
 
 const Home = () => {
   return (

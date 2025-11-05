@@ -73,6 +73,15 @@ type ShoeView = {
   sizes: number[];
 };
 
+type ApiPost = {
+  _id: string;
+  title?: string;
+  description?: string;
+  imageurl?: string;
+  price?: number;
+  brand?: string;
+};
+
 export default function ProductDetailPage() {
   const params = useParams<{ id: string }>();
   const id = params?.id as string;
@@ -90,7 +99,7 @@ export default function ProductDetailPage() {
       try {
         const res = await fetch("/api/post", { cache: "no-store" });
         if (res.ok) {
-          const items: any[] = await res.json();
+          const items: ApiPost[] = await res.json();
           const found = items.find((p) => p._id === id);
           if (found) {
             const mapped: ShoeView = {
@@ -134,7 +143,7 @@ export default function ProductDetailPage() {
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center">
           <p className="text-xl font-semibold">Product not found</p>
-          <p className="text-gray-500 mt-2">The item you are looking for doesn't exist.</p>
+          <p className="text-gray-500 mt-2">The item you are looking for doesn&apos;t exist.</p>
         </div>
       </div>
     );
