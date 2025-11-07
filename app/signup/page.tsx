@@ -1,11 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 
-export default function SignUpPage() {
+function SignUpInner() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +31,7 @@ export default function SignUpPage() {
       }
       // After successful signup, send user to Sign in to log in with their new credentials
       router.push(`/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
-    } catch (e) {
+    } catch {
       setError("Something went wrong");
       setLoading(false);
     }
@@ -61,5 +59,13 @@ export default function SignUpPage() {
         <p className="text-sm text-center">Already have an account? <Link className="underline" href={`/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`}>Sign in</Link></p>
       </div>
     </div>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading…</div>}>
+      <SignUpInner />
+    </Suspense>
   );
 }

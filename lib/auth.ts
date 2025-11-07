@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
@@ -24,42 +24,59 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
         await connect();
-        const user: any = await User.findOne({ email: credentials.email }).exec();
+        const user = (await User.findOne({ email: credentials.email }).exec()) as (null | {
+          _id: { toString(): string };
+          name?: string | null;
+          email: string;
+          image?: string | null;
+          password?: string;
+        });
         if (!user || !user.password) return null;
         const ok = await bcrypt.compare(credentials.password, user.password);
         if (!ok) return null;
-        return { id: user._id.toString(), name: user.name, email: user.email, image: user.image } as any;
+        return { id: user._id.toString(), name: user.name ?? null, email: user.email, image: user.image ?? null };
       },
     }),
   ],
   session: { strategy: "jwt" },
   pages: { signIn: "/signin" },
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user }) {
       if (!user?.email) return false;
       await connect();
-      const existing: any = await User.findOne({ email: user.email }).exec();
+      const existing = await User.findOne({ email: user.email }).exec();
       if (!existing) {
         await User.create({ name: user.name, email: user.email, image: user.image });
       }
       return true;
     },
     async jwt({ token, user }) {
-      if (user) token.user = { name: user.name, email: user.email, image: (user as any).image } as any;
-      const email = (token.user as any)?.email as string | undefined;
+      if (user) {
+        (token as Record<string, unknown>).user = {
+          name: user.name ?? undefined,
+          email: user.email ?? undefined,
+          image: (user as { image?: string | null }).image ?? undefined,
+        };
+      }
+      const tokenUser = (token as Record<string, unknown>).user as { email?: string } | undefined;
+      const email = tokenUser?.email;
       if (email && email.toLowerCase() === 'geraldgchibanda6025@gmail.com') {
-        (token as any).role = 'admin';
+        (token as Record<string, unknown>).role = 'admin';
       }
       return token;
     },
     async session({ session, token }) {
-      if (token?.user && session.user) {
-        session.user.name = (token.user as any).name;
-        session.user.email = (token.user as any).email;
-        session.user.image = (token.user as any).image;
+      const tokenUser = (token as Record<string, unknown>).user as
+        | { name?: string; email?: string; image?: string }
+        | undefined;
+      if (tokenUser && session.user) {
+        session.user.name = tokenUser.name ?? null;
+        session.user.email = tokenUser.email ?? null;
+        session.user.image = tokenUser.image ?? null;
       }
-      if ((token as any)?.role && session.user) {
-        (session.user as any).role = (token as any).role;
+      const role = (token as Record<string, unknown>).role as string | undefined;
+      if (role && session.user) {
+        (session.user as { role?: string }).role = role;
       }
       return session;
     },

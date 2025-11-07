@@ -7,7 +7,6 @@ import { useCart } from '@/components/cartContext'
 import { useSession } from 'next-auth/react'
 import { signOut } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
-import Image from 'next/image'
 
 const Nav = () => {
   const [open, setOpen] = useState(false)
@@ -47,7 +46,7 @@ const Nav = () => {
             </span>
           )}
         </Link>
-        {session?.user && (session.user as any).role === 'admin' && (
+        {((session?.user as { role?: string } | undefined)?.role === 'admin') && (
           <Link href='/admin' className={'text-sm border px-2 py-1 rounded ' + (isAuth ? 'text-white border-white' : 'text-black border-black')}>
             Admin
           </Link>

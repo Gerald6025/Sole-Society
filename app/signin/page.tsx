@@ -1,10 +1,10 @@
 "use client";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function SignInPage() {
+function SignInInner() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -50,5 +50,13 @@ export default function SignInPage() {
         <p className="text-sm text-center">No account? <Link className="underline" href={`/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`}>Sign up</Link></p>
       </div>
     </div>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading…</div>}>
+      <SignInInner />
+    </Suspense>
   );
 }

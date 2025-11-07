@@ -14,7 +14,7 @@ type Product = {
 
 export default function AdminPage() {
   const { data: session, status } = useSession();
-  const isAdmin = useMemo(() => (session?.user as any)?.role === "admin", [session]);
+  const isAdmin = useMemo(() => (session?.user as { role?: string } | undefined)?.role === "admin", [session]);
   const [items, setItems] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -72,7 +72,7 @@ export default function AdminPage() {
     setSaving(true);
     setError(null);
     try {
-      const payload: any = {
+      const payload: Partial<Product> = {
         name: form.name,
         model: form.model,
         brand: form.brand,
