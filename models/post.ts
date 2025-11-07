@@ -25,7 +25,6 @@ const postSchema = new Schema({
         type: Number,
         required: true
     },
-
  },{timestamps:true})
 
  export default mongoose.models.post || mongoose.model('post', postSchema)

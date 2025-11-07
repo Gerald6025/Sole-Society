@@ -1,0 +1,47 @@
+[
+  {
+    "id": "s1",
+    "name": "NIKE",
+    "model": "Air Max 90",
+    "brand": "Nike",
+    "price": 129.99,
+    "image": "/Nike.jpeg",
+    "sizes": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "id": "s2",
+    "name": "VANS",
+    "model": "Old Skool",
+    "brand": "Vans",
+    "price": 79.99,
+    "image": "/va.png",
+    "sizes": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "id": "s3",
+    "name": "ADIDAS",
+    "model": "Campus",
+    "brand": "Adidas",
+    "price": 92.99,
+    "image": "/ad.png",
+    "sizes": [
+      7,
+      8,
+      9,
+      10
+    ]
+  }
+]

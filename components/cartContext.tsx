@@ -1,5 +1,6 @@
 "use client";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useSession } from "next-auth/react";
 
 export type CartItem = {
   id: string;
@@ -18,14 +19,15 @@ type CartContextValue = {
   removeItem: (id: string, size?: number) => void;
   updateQty: (id: string, size: number | undefined, qty: number) => void;
   clear: () => void;
+  clearWithoutPersist: () => void;
 };
 
 const CartContext = createContext<CartContextValue | undefined>(undefined);
 
-function load(): CartItem[] {
+function loadForKey(key: string): CartItem[] {
   if (typeof window === "undefined") return [];
   try {
-    const raw = localStorage.getItem("cart:v1");
+    const raw = localStorage.getItem(key);
     return raw ? (JSON.parse(raw) as CartItem[]) : [];
   } catch {
     return [];
@@ -34,16 +36,33 @@ function load(): CartItem[] {
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<CartItem[]>([]);
+  const { data: session, status } = useSession();
+  const email = session?.user?.email || null;
+  const storageKey = email ? `cart:v1:${email}` : null;
+  const [skipPersist, setSkipPersist] = useState(false);
 
+  // Load cart for current user when session is ready/changes
   useEffect(() => {
-    setItems(load());
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cart:v1", JSON.stringify(items));
+    if (status === "loading") return;
+    if (!storageKey) {
+      // Logged out: ensure empty cart
+      setItems([]);
+      return;
     }
-  }, [items]);
+    setItems(loadForKey(storageKey));
+  }, [storageKey, status]);
+
+  // Persist cart to current user's storage key
+  useEffect(() => {
+    if (!storageKey) return;
+    if (skipPersist) {
+      setSkipPersist(false);
+      return;
+    }
+    if (typeof window !== "undefined") {
+      localStorage.setItem(storageKey, JSON.stringify(items));
+    }
+  }, [items, storageKey, skipPersist]);
 
   const addItem: CartContextValue["addItem"] = (item) => {
     setItems((prev) => {
@@ -67,10 +86,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const clear = () => setItems([]);
+  const clearWithoutPersist = () => {
+    setSkipPersist(true);
+    setItems([]);
+  };
 
   const subtotal = useMemo(() => items.reduce((sum, i) => sum + i.price * i.qty, 0), [items]);
 
-  const value: CartContextValue = { items, subtotal, addItem, removeItem, updateQty, clear };
+  const value: CartContextValue = { items, subtotal, addItem, removeItem, updateQty, clear, clearWithoutPersist };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

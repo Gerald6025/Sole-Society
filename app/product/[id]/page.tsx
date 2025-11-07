@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import SneakerProduct from "@/components/sneakerProduct";
 import { useCart } from "@/components/cartContext";
+import { useSession } from "next-auth/react";
 
 // Temporary product source matching IDs used in components/top.tsx
 // If you later fetch from an API, replace this with a real fetch.
@@ -87,6 +88,7 @@ export default function ProductDetailPage() {
   const id = params?.id as string;
   const router = useRouter();
   const { addItem } = useCart();
+  const { data: session } = useSession();
 
   const [product, setProduct] = useState<ShoeView | null>(null);
   const [loading, setLoading] = useState(true);
@@ -160,6 +162,11 @@ export default function ProductDetailPage() {
         selectedSize={selected}
         onSizeSelect={(s) => setSelected(s)}
         onBuy={() => {
+          if (!session?.user) {
+            const callbackUrl = `/product/${id}`;
+            router.push(`/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+            return;
+          }
           addItem({
             id,
             name: product.name,

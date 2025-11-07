@@ -15,7 +15,7 @@ import Who from "@/components/who";
 
 const Home = () => {
   return (
-    <div className="bg-[#ffffff] w-full md:h-[1030vh] h-[1100vh] absolute  top-0 left-0 overflow-hidden">
+    <div className="bg-[#ffffff] w-full md:h-[1090vh] h-[1100vh] absolute  top-0 left-0 overflow-hidden">
       <Hero />
       <LogoRowAnimated />
       <Well />

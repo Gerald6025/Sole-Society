@@ -27,6 +27,29 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Full-page background helpers (applied as body classes) */
+.bg-signin {
+  background-image: url('/men.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-signup {
+  background-image: url('/pub.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Coming soon background */
+.bg-comingsoon {
+  background-image: url('/pal.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .nav{
 @apply relative
 }
