@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useCart } from "@/components/cartContext";
+import Link from "next/link";
 
 const currency = (n: number) => new Intl.NumberFormat(undefined, { style: "currency", currency: "USD" }).format(n);
 
@@ -74,7 +75,7 @@ const CartView: React.FC = () => {
               <span className="text-gray-500 mr-2">Subtotal</span>
               <span className="font-bold">{currency(subtotal)}</span>
             </div>
-            <button className="bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-900">Checkout</button>
+            <Link href="/checkout" className="bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-900">Checkout</Link>
           </div>
         </div>
       </div>
